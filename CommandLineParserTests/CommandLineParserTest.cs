@@ -8,6 +8,15 @@ namespace CommandLineParserTests
     [TestClass]
     public class CommandLineParserTest
     {
+
+        /// <summary>
+        /// In a production application these would be stored in a content management system and set through configuration.
+        /// </summary>
+        private const string FORMAT_MESSAGE =
+            "Invalid Format. Commands should be in the format of:\n --command name for uniary commands\n --command=parameter for commands that take parameters";
+
+        private const string SUCCESS_MESSAGE = "Success.";
+
         [TestMethod]
         public void CommandLineShouldParseCorrectly()
         {
@@ -16,7 +25,7 @@ namespace CommandLineParserTests
 
             var result = commandLineParser.Parse(stringUnderTest, out var message);
             Assert.IsTrue(result.Count == 4);
-            Assert.AreEqual(message, "Success.");
+            Assert.AreEqual(message, SUCCESS_MESSAGE);
         }
 
         [TestMethod]
@@ -27,7 +36,7 @@ namespace CommandLineParserTests
 
             var result = commandLineParser.Parse(stringUnderTest, out var message);
             Assert.IsTrue(result.Count == 4);
-            Assert.AreEqual(message, "Success.");
+            Assert.AreEqual(message, SUCCESS_MESSAGE);
         }
 
         [TestMethod]
@@ -38,7 +47,7 @@ namespace CommandLineParserTests
 
             var result = commandLineParser.Parse(stringUnderTest, out var message);
             Assert.IsTrue(result.Count == 4);
-            Assert.AreEqual(message, "Success.");
+            Assert.AreEqual(message, SUCCESS_MESSAGE);
         }
 
         [TestMethod]
@@ -49,7 +58,7 @@ namespace CommandLineParserTests
 
             var result = commandLineParser.Parse(stringUnderTest, out var message);
             Assert.IsFalse(result.Keys.Any(k => k.Contains("--")));
-            Assert.AreEqual(message, "Success.");
+            Assert.AreEqual(message, SUCCESS_MESSAGE);
         }
 
         [TestMethod]
@@ -60,7 +69,7 @@ namespace CommandLineParserTests
 
             var result = commandLineParser.Parse(stringUnderTest, out var message);
             Assert.AreEqual(result.Keys.First(), "key");
-            Assert.AreEqual(message, "Success.");
+            Assert.AreEqual(message, SUCCESS_MESSAGE);
         }
 
         [TestMethod]
@@ -71,7 +80,7 @@ namespace CommandLineParserTests
 
             var result = commandLineParser.Parse(stringUnderTest, out var message);
             Assert.AreEqual(result.Values.First(), "value");
-            Assert.AreEqual(message, "Success.");
+            Assert.AreEqual(message, SUCCESS_MESSAGE);
         }
 
         [TestMethod]
@@ -82,7 +91,7 @@ namespace CommandLineParserTests
 
             var result = commandLineParser.Parse(stringUnderTest, out var message);
             Assert.IsTrue(result.Count > 0);
-            Assert.AreEqual(message, "Success.");
+            Assert.AreEqual(message, SUCCESS_MESSAGE);
         }
 
         [TestMethod]
@@ -93,7 +102,7 @@ namespace CommandLineParserTests
 
             var result = commandLineParser.Parse(stringUnderTest, out var message);
             Assert.IsTrue(result.Count > 0);
-            Assert.AreEqual(message, "Success.");
+            Assert.AreEqual(message, SUCCESS_MESSAGE);
         }
 
         [TestMethod]
@@ -115,7 +124,7 @@ namespace CommandLineParserTests
 
             var result = commandLineParser.Parse(stringUnderTest, out var message);
             Assert.IsTrue(result.Count == 0);
-            Assert.AreEqual(message, "Invalid Format. Commands should be in the format of:\n --command name for uniary commands\n --command=parameter for commands that take parameters");
+            Assert.AreEqual(message, FORMAT_MESSAGE);
         }
     }
 }
